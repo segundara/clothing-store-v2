@@ -27,6 +27,9 @@ const FetchHandler = () => {
                 }
 
                 dispatch({
+                    type: "LOADING_STARTS"
+                });
+                dispatch({
                     type: "GET_PRODUCT_LIST",
                     payload: initialData
                 });
