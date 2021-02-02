@@ -12,6 +12,7 @@ const ManufacturerListHandler = () => {
 
         const getManufacturers = () => {
             const items = state.data.products
+
             const manufacturerArray = [...(new Set(items.map(obj => obj.manufacturer)))]
 
             dispatch({

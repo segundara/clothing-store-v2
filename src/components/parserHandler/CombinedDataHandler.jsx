@@ -21,7 +21,7 @@ const CombinedDataHandler = () => {
                 for (let k = 0; k < availabilityData.length; k++) {
                     const availabilityElement = availabilityData[k];
 
-                    if (element.id.toUpperCase() === availabilityElement.id) {
+                    if (element.id.toUpperCase() === availabilityElement.id.toUpperCase()) {
                         const availability = availabilityElement.DATAPAYLOAD
                         finalData = [...finalData, { ...element, availability }]
                         break;

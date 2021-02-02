@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import ManufacturerListHandler from './ManufacturerListHandler'
-import givenTypes from './ProductTypes'
+import categories from './ProductTypes'
 import { Spinner } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -14,21 +14,15 @@ const FetchHandler = () => {
 
         const fetchData = async () => {
             let initialData = [];
-            let categories = []
-            categories = [...categories, ...givenTypes()]
             try {
 
                 for (const type of categories) {
-                    // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                     const url = `${process.env.REACT_APP_API_URL}/products/${type}`;
                     let res1 = await fetch(url)
                     let res1Array = await res1.json()
                     initialData = [...initialData, ...res1Array]
                 }
 
-                dispatch({
-                    type: "LOADING_STARTS"
-                });
                 dispatch({
                     type: "GET_PRODUCT_LIST",
                     payload: initialData
@@ -42,6 +36,9 @@ const FetchHandler = () => {
             }
         }
 
+        dispatch({
+            type: "LOADING_STARTS"
+        });
         fetchData();
 
     }, [dispatch])
