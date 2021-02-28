@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Storage from './DisplayHandler';
 import { useDispatch, useSelector } from "react-redux";
 
 const CurrentListHandler = () => {
@@ -28,10 +27,6 @@ const CurrentListHandler = () => {
                 type: "GET_CURRENT_LISTING",
                 payload: currentDisplay
             });
-
-            dispatch({
-                type: "LOADING_DONE"
-            });
         }
 
         showCurrentList()
@@ -39,11 +34,7 @@ const CurrentListHandler = () => {
     }, [dispatch, state.data.finalOutput, state.data.perPage, state.data.currentPage])
 
     return (
-        <>
-            {!state.status.isLoading && state.data.currentList.length > 0 && (
-                <Storage />
-            )}
-        </>
+        <></>
     )
 }
 

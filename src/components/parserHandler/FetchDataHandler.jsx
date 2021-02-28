@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
 import ManufacturerListHandler from './ManufacturerListHandler'
 import categories from './ProductTypes'
-import { Spinner } from "react-bootstrap";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const FetchHandler = () => {
 
     const dispatch = useDispatch();
-    const state = useSelector(state => state)
 
     useEffect(() => {
 
         const fetchData = async () => {
             let initialData = [];
             try {
-
                 for (const type of categories) {
                     const url = `${process.env.REACT_APP_API_URL}/products/${type}`;
                     let res1 = await fetch(url)
@@ -30,41 +27,20 @@ const FetchHandler = () => {
 
             } catch (error) {
                 dispatch({
-                    type: "HAS_ERROR",
-                    payload: error
+                    type: "HAS_ERROR"
                 });
             }
         }
 
-        dispatch({
-            type: "LOADING_STARTS"
-        });
         fetchData();
 
     }, [dispatch])
 
     return (
         <>
-            {state.status.isLoading && (
-                <div
-                    style={{
-                        width: "10%",
-                        height: "auto",
-                        margin: "45vh 50vw",
-                    }}
-                >
-                    <Spinner animation="border" variant="dark" />
-                </div>
-            )}
-            {!state.status.isLoading && state.status.error !== null && (
-                <>
-                    <h1>Some problems while getting data!!!</h1>
-                    {console.log(state.status.error)}
-                </>
-            )}
             <ManufacturerListHandler />
         </>
     )
 }
 
-export default FetchHandler
+export default FetchHandler;
